@@ -9,7 +9,7 @@
 // When you have real images, replace <Scene /> in <CreativeCard> with <Image fill ... />.
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CalendarDays,
   Heart,
@@ -331,7 +331,11 @@ export default function ExplorePage() {
   const [saved, setSaved] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
 
-  const weekends = useMemo(() => upcomingWeekends(), []);
+  const [weekends, setWeekends] = useState<string[]>([]);
+
+useEffect(() => {
+  setWeekends(upcomingWeekends());
+}, []);
 
   // How many creatives in the chosen category are free on each weekend day.
   const freeByDate = useMemo(() => {
